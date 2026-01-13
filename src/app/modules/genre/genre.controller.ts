@@ -62,12 +62,27 @@ const updateGenre = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+// Delete genre
+const deleteGenre = catchAsync(async (req: Request, res: Response) => {
+  const id = req?.params?.id as string;
+  const result = await GenreService.deleteGenre(id);
+
+  // Send response
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Genre deleted successfully",
+    data: result,
+  });
+});
+
 // Genre controller object
 const GenreController = {
   getAllGenres,
   getSingleGenre,
   createGenre,
   updateGenre,
+  deleteGenre,
 };
 
 export default GenreController;

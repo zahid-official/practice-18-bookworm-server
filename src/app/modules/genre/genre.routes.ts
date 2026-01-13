@@ -36,6 +36,9 @@ router.patch(
   GenreController.updateGenre
 );
 
+// Delete routes
+router.delete("/:id", validateToken(Role.ADMIN), GenreController.deleteGenre);
+
 // Export genre routes
 const GenreRoutes = router;
 export default GenreRoutes;

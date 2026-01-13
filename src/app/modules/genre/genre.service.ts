@@ -1,6 +1,7 @@
 import AppError from "../../errors/AppError";
 import { httpStatus } from "../../import";
 import QueryBuilder from "../../utils/queryBuilder";
+import Book from "../book/book.model";
 import Genre from "./genre.model";
 import { IGenre } from "./genre.interface";
 
@@ -79,12 +80,38 @@ const updateGenre = async (id: string, payload: Partial<IGenre>) => {
   });
 };
 
+// Delete genre
+const deleteGenre = async (id: string) => {
+  const genre = await Genre.findById(id).where({ isDeleted: { $ne: true } });
+  if (!genre) {
+    throw new AppError(httpStatus.NOT_FOUND, "Genre not found");
+  }
+
+  const associatedBooks = await Book.countDocuments({
+    genre: id,
+    isDeleted: { $ne: true },
+  });
+  if (associatedBooks > 0) {
+    throw new AppError(
+      httpStatus.CONFLICT,
+      `Cannot delete genre. ${associatedBooks} book(s) are associated with it.`
+    );
+  }
+
+  return await Genre.findByIdAndUpdate(
+    id,
+    { isDeleted: true },
+    { new: true }
+  );
+};
+
 // Genre service object
 const GenreService = {
   getAllGenres,
   getSingleGenre,
   createGenre,
   updateGenre,
+  deleteGenre,
 };
 
 export default GenreService;
