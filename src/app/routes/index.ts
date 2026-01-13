@@ -5,6 +5,7 @@ import AdminRoutes from "../modules/admin/admin.routes";
 import ReaderRoutes from "../modules/reader/reader.routes";
 import GenreRoutes from "../modules/genre/genre.routes";
 import BookRoutes from "../modules/book/book.routes";
+import ReviewRoutes from "../modules/review/review.routes";
 
 // Initialize main router
 const router = Router();
@@ -34,6 +35,10 @@ const moduleRoutes = [
   {
     path: "/book",
     route: BookRoutes,
+  },
+  {
+    path: "/review",
+    route: ReviewRoutes,
   },
 ];
 

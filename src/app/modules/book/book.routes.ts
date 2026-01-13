@@ -4,10 +4,22 @@ import validateToken from "../../middlewares/validateToken";
 import { Role } from "../user/user.interface";
 import multerUpload from "../../config/multer";
 import BookController from "./book.controller";
-import { createBookZodSchema } from "./book.validation";
+import { createBookZodSchema, updateBookZodSchema } from "./book.validation";
 
 // Initialize router
 const router = Router();
+
+// Get routes
+router.get(
+  "/",
+  validateToken(...Object.values(Role)),
+  BookController.getAllBooks
+);
+router.get(
+  "/:id",
+  validateToken(...Object.values(Role)),
+  BookController.getSingleBook
+);
 
 // Post routes
 router.post(
@@ -16,6 +28,15 @@ router.post(
   validateToken(Role.ADMIN),
   validateSchema(createBookZodSchema),
   BookController.createBook
+);
+
+// Patch routes
+router.patch(
+  "/:id",
+  multerUpload.single("file"),
+  validateToken(Role.ADMIN),
+  validateSchema(updateBookZodSchema),
+  BookController.updateBook
 );
 
 // Export book routes
