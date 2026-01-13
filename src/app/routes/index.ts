@@ -7,6 +7,7 @@ import GenreRoutes from "../modules/genre/genre.routes";
 import BookRoutes from "../modules/book/book.routes";
 import ReviewRoutes from "../modules/review/review.routes";
 import TutorialRoutes from "../modules/tutorial/tutorial.routes";
+import LibraryRoutes from "../modules/library/library.routes";
 
 // Initialize main router
 const router = Router();
@@ -44,6 +45,10 @@ const moduleRoutes = [
   {
     path: "/tutorial",
     route: TutorialRoutes,
+  },
+  {
+    path: "/library",
+    route: LibraryRoutes,
   },
 ];
 
