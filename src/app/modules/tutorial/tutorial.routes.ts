@@ -8,6 +8,18 @@ import { createTutorialZodSchema } from "./tutorial.validation";
 // Initialize router
 const router = Router();
 
+// Get routes
+router.get(
+  "/",
+  validateToken(...Object.values(Role)),
+  TutorialController.getAllTutorials
+);
+router.get(
+  "/:id",
+  validateToken(...Object.values(Role)),
+  TutorialController.getSingleTutorial
+);
+
 // Post routes
 router.post(
   "/create",
