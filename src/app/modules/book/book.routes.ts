@@ -39,6 +39,9 @@ router.patch(
   BookController.updateBook
 );
 
+// Delete routes
+router.delete("/:id", validateToken(Role.ADMIN), BookController.deleteBook);
+
 // Export book routes
 const BookRoutes = router;
 export default BookRoutes;

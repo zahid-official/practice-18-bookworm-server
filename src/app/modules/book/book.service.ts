@@ -104,12 +104,23 @@ const updateBook = async (id: string, payload: Partial<IBook>) => {
   });
 };
 
+// Delete book
+const deleteBook = async (id: string) => {
+  const book = await Book.findById(id);
+  if (!book) {
+    throw new AppError(httpStatus.NOT_FOUND, "Book not found");
+  }
+
+  return await Book.findByIdAndDelete(id);
+};
+
 // Book service object
 const BookService = {
   getAllBooks,
   getSingleBook,
   createBook,
   updateBook,
+  deleteBook,
 };
 
 export default BookService;
