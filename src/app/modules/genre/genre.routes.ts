@@ -15,7 +15,7 @@ router.get(
   GenreController.getAllGenres
 );
 router.get(
-  "singleGenre/:id",
+  "/singleGenre/:id",
   validateToken(...Object.values(Role)),
   GenreController.getSingleGenre
 );
