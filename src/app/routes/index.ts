@@ -3,6 +3,8 @@ import AuthRoutes from "../modules/auth/auth.routes";
 import UserRoutes from "../modules/user/user.routes";
 import AdminRoutes from "../modules/admin/admin.routes";
 import ReaderRoutes from "../modules/reader/reader.routes";
+import GenreRoutes from "../modules/genre/genre.routes";
+import BookRoutes from "../modules/book/book.routes";
 
 // Initialize main router
 const router = Router();
@@ -24,6 +26,14 @@ const moduleRoutes = [
   {
     path: "/reader",
     route: ReaderRoutes,
+  },
+  {
+    path: "/genre",
+    route: GenreRoutes,
+  },
+  {
+    path: "/book",
+    route: BookRoutes,
   },
 ];
 
